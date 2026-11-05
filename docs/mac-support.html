@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Support and known limitations for Axis Device Discovery for Mac, including AXIS Camera Station server discovery.">
+  <title>Mac Support · Axis Device Discovery</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="mac.css">
+  <link rel="icon" href="assets/app-icon.png" type="image/png">
+</head>
+<body class="mac-page">
+<header><nav aria-label="Main navigation"><a class="brand" href="mac.html">Axis Device Discovery for Mac</a><a href="mac-support.html" aria-current="page">Support</a><a href="mac-privacy.html">Privacy</a><a href="support.html">iOS Support</a></nav></header>
+<main>
+  <h1>Mac Support</h1>
+  <p class="lead">Help with local device discovery, server IP addresses, and missing device details.</p>
+  <p><a href="#chinese" lang="zh-CN">简体中文</a></p>
+  <section class="page-section" aria-labelledby="getting-started">
+    <h2 id="getting-started">Getting started</h2>
+    <ol>
+      <li>Open the installed Mac application. For a directly distributed package, open AxisDiscovery.app rather than the architecture-specific command-line files.</li>
+      <li>Connect your Mac to a network that permits communication with the devices. Wi-Fi or Ethernet can be used.</li>
+      <li>Allow Local Network access if macOS asks, then scan. Refresh clears previous results before displaying the new scan.</li>
+      <li>Filter by name, IP, or serial number. Click column headings to sort, and select or right-click values to copy them.</li>
+    </ol>
+  </section>
+  <section class="page-section" aria-labelledby="missing-devices">
+    <h2 id="missing-devices">No devices, or some devices are missing</h2>
+    <ul>
+      <li>On macOS versions with Local Network privacy settings, check System Settings → Privacy &amp; Security → Local Network and enable the app. Older macOS versions may not show this setting.</li>
+      <li>Make sure the relevant discovery services are enabled. Bonjour, SSDP, and ONVIF support varies by device and firmware.</li>
+      <li>Guest Wi-Fi, wireless client isolation, VLAN boundaries, VPN routing, and firewalls can block discovery. Ask your network administrator to review the intended traffic rather than disabling security.</li>
+      <li>A reachable web page does not guarantee discovery: web requests use unicast, while discovery commonly uses local multicast.</li>
+      <li>Multiple active network interfaces can affect routing and discovery coverage.</li>
+    </ul>
+    <p>Mac and iOS results can differ. The Mac app uses Bonjour/DNS-SD, SSDP, and ONVIF WS-Discovery; the current iOS app uses Bonjour discovery.</p>
+  </section>
+  <section class="page-section" id="camera-station" aria-labelledby="acs-title">
+    <h2 id="acs-title">AXIS Camera Station: IP found, serial number NULL</h2>
+    <p>The Mac app can discover AXIS Camera Station server IP addresses when the server responds to supported ONVIF WS-Discovery probes. The name may appear as AXISCameraStation.</p>
+    <p><strong>Known limitation:</strong> a server may not provide a serial number in its discovery response. The value is then unavailable (NULL) and may be displayed as Unknown. The server remains in the list and its IP can still be selected and copied. This is not a failed scan.</p>
+    <p>Discovery identifies a responding server endpoint; it does not sign in to Camera Station, enumerate all cameras managed by it, or change server configuration.</p>
+  </section>
+  <section class="page-section" aria-labelledby="other-details">
+    <h2 id="other-details">Other missing serial numbers</h2>
+    <p>Device descriptions, Bonjour metadata, and anonymous VAPIX requests do not always provide a serial number. Unknown is expected when a device does not publish the information or requires authentication. The app does not bypass authentication.</p>
+    <h2>Multiple addresses</h2>
+    <p>Bonjour address selection skips loopback addresses such as 127.0.0.1. When a service returns multiple IPv4 addresses, the app prefers an address outside 169.254.x.x; a link-local address is retained as a fallback if no other IPv4 address is available.</p>
+    <h2>Window and appearance</h2>
+    <p>The app follows the system's light or dark appearance. Closing the window is not the same as quitting; clicking the Dock icon should restore the window. Use Quit to fully exit.</p>
+    <h2>Is the Mac app free?</h2>
+    <p>Yes. The Mac app has no trial deadline, subscriptions, or in-app purchases. The separate iPhone/iPad app has its own purchase terms.</p>
+  </section>
+  <section class="page-section" aria-labelledby="contact">
+    <h2 id="contact">Contact support</h2>
+    <p>Email: <a href="mailto:haichao_ji@163.com">haichao_ji@163.com</a></p>
+    <p>Include your app version/build, macOS version, Mac architecture, device model/firmware, and steps to reproduce the issue. Redact serial numbers and private network details in screenshots. Do not send passwords, account tokens, or camera footage.</p>
+  </section>
+  <section class="page-section" id="chinese" lang="zh-CN" aria-labelledby="chinese-support">
+    <h2 id="chinese-support">中文支持</h2>
+    <h3>开始使用</h3>
+    <p>打开安装好的 Mac 应用。直接分发版本请运行 AxisDiscovery.app，不要运行架构切片文件。通过 Wi-Fi 或有线网络连接到设备所在网络，允许系统提示的“本地网络”访问。刷新会先清除旧结果，输入框支持名称、IP 或序列号的大小写不敏感筛选，点击列标题可排序，选择文本或右键可复制。</p>
+    <h3>没有发现设备或结果不完整</h3>
+    <p>在提供“本地网络”设置的 macOS 版本中检查应用权限。确认设备启用了可用的发现服务，并请网络管理员排查访客网络、客户端隔离、VLAN、VPN 与防火墙规则，不要直接关闭安全防护。网页可访问不代表设备会响应组播发现，多网卡还可能影响路由。Mac 版使用 Bonjour、SSDP 和 ONVIF WS-Discovery，当前 iOS 版只做 Bonjour 发现，因此结果可能不同。</p>
+    <h3>AXIS Camera Station：能发现 IP，但序列号为 NULL</h3>
+    <p>Mac 版可发现响应受支持 ONVIF WS-Discovery 探测的 AXIS Camera Station 服务器 IP，名称可能显示为 AXISCameraStation。<strong>服务器未提供序列号时，该值为 NULL（不可用），界面可能显示“未知”，这是已知限制，不代表扫描失败。</strong>服务器仍会保留在列表里，IP 可选中并复制。</p>
+    <p>发现服务器不等于登录 Camera Station，也不会自动列出服务器管理的全部摄像机或更改其配置。其他设备未公开序列号、或需要认证时，也可能显示“未知”。应用不会绕过认证。</p>
+    <h3>多个 IP、窗口与免费使用</h3>
+    <p>Bonjour 选择地址时跳过 127.x.x.x 回环地址；同时返回普通 IPv4 与 169.254.x.x 时优先普通地址，仅有链路本地地址时保留回退。界面跟随系统外观；红色关闭按钮关闭窗口但不等于退出，点击 Dock 图标应恢复窗口。Mac 版免费使用，无试用期限、订阅或内购。</p>
+    <h3>联系我们</h3>
+    <p>邮箱：<a href="mailto:haichao_ji@163.com">haichao_ji@163.com</a>。请提供 app 版本/构建号、macOS 版本、Mac 架构、设备型号/固件与复现步骤。截图请遮盖敏感网络信息，不要发送密码、令牌或录像。</p>
+  </section>
+</main>
+<footer><div><a href="mac.html">Mac Home</a> · <a href="mac-privacy.html">Privacy Policy</a> · © 2026 Rocky Ji</div></footer>
+</body>
+</html>
